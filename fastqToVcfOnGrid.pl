@@ -82,9 +82,9 @@ if ($sp eq 'mouse')
           @chrlist = qw(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 X Y);
      } elsif ($sp eq 'macaque')
           {
-               $ref = '';
-               $exons = '';
-               $vcf = '';
+               $ref = '/NGS/macaqueRef/Mmul_8.0.1/ensembl/refdata/fasta/genome.fa';
+               $exons = '/NGS/macaqueRef/Mmul_8.0.1/ensembl/refdata/regions';
+               $vcf = '/NGS/macaqueRef/Mmul_8.0.1/ensembl/refdata/snps/macaca_mulatta.vcf';
                @chrlist = qw(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 X Y);
           }
 
