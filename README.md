@@ -45,26 +45,32 @@ The Broad Institute provide [a detailed explanation of read groups](https://gatk
 * fastq filename:		WTCHG_461109_50_1.fastq.gz
 * fastq headers:		@K00150:286:HNGMNBBXX:5:XXXX:XXXX:XXXX 1:N:0:XXXX       
 
-		                @instrument	    run number	flowcell ID	    lane	tile	x-pos	y-pos 	read	is filtered	    control number	index (barcode)
-						@K00150:		286:		HNGMNBBXX:		5:		XXXX:	XXXX:	XXXX:	1:		N:				0: 				XXXX
-						# XXXX indicates entries that differentiate reads within a read group so is not needed for read group information
+```
+@instrument	    run number	flowcell ID	    lane	tile	x-pos	y-pos 	read	is filtered	    control number	index (barcode)
+@K00150:		286:		HNGMNBBXX:		5:		XXXX:	XXXX:	XXXX:	1:		N:				0: 				XXXX
+# XXXX indicates entries that differentiate reads within a read group so is not needed for read group information
+```
 
 * sample/qcstats sheets:
 
-                        Index	Tag			Readgroup		    Sample name		Sample id		Library				Type			Genome			Project		Date
-						50		GTCTGTCA	WTCHG_461109_50	    mpc372-2.5e		POT5490A2		106/18_MPX_10nM		SureSelectXT	mm10 	8-bp	P180007 	2018-02-08
+```
+Index	Tag			Readgroup		    Sample name		Sample id		Library				Type			Genome			Project		Date
+50		GTCTGTCA	WTCHG_461109_50	    mpc372-2.5e		POT5490A2		106/18_MPX_10nM		SureSelectXT	mm10 	8-bp	P180007 	2018-02-08
+```
 
 To view the barcodes present in the fastq file: `grep '^@K00150:286' WTCHG_461109_50_2.fastq | cut -d : -f 10 | sort | uniq -c | sort -nr > barcodes.txt`
 
 The read group information required by the script `fastqToVar.pl` can now be extracted for this example data to build the [example run command](#example-run-command):
 
-        --READ_GROUP_NAME 		WTCHG_461109_50             # ID
-        --SAMPLE_NAME 			mpc372-2.5e                	# SM
-        --LIBRARY_NAME 			106/18_MPX_10nM             # LB
-        --PLATFORM 				illumina                    # PL
-        --PLATFORM_UNIT 		HNGMNBBXX.GTCTGTCA.5		# PU # flowcellID.[barcode|date|readgroup].lane
-        --SEQUENCING_CENTER 	WTCHG                       # CN
-        --RUN_DATE 				2018-02-08    				# DT
+```
+--READ_GROUP_NAME 		WTCHG_461109_50             # ID
+--SAMPLE_NAME 			mpc372-2.5e                	# SM
+--LIBRARY_NAME 			106/18_MPX_10nM             # LB
+--PLATFORM 				illumina                    # PL
+--PLATFORM_UNIT 		HNGMNBBXX.GTCTGTCA.5		# PU # flowcellID.[barcode|date|readgroup].lane
+--SEQUENCING_CENTER 	WTCHG                       # CN
+--RUN_DATE 				2018-02-08    				# DT
+```
 
 ## Quality Control
 
@@ -109,7 +115,9 @@ All options are required.
 
 Once the script finishes the read group information can be printed from the BAM file with: `samtools view -H WTCHG_461109_50.bam | grep '@RG'`
 
-        @RG	ID:WTCHG_461109_50	SM:mpc372-2.5e	LB:106/18_MPX_10nM	PL:illumina PU:HNGMNBBXX.GTCTGTCA.5 CN:WTCHG	DT:2018-02-08
+```
+@RG	ID:WTCHG_461109_50	SM:mpc372-2.5e	LB:106/18_MPX_10nM	PL:illumina PU:HNGMNBBXX.GTCTGTCA.5 CN:WTCHG	DT:2018-02-08
+```
 
 ## Multiple commands for calling GATK
 
