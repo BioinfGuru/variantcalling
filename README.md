@@ -98,7 +98,8 @@ All options are required.
 
 ## Example run command
 
-`fastqToVcfOnGrid.pl /
+```
+fastqToVcfOnGrid.pl /
 -m wes /
 -sp mouse /
 -of vcf /
@@ -110,8 +111,8 @@ All options are required.
 -pl illumina /
 -cn WTCHG /
 -dt 2018-02-08 / 
--o /path/to/output/folder/`
-
+-o /path/to/output/folder/
+```
 
 Once the script finishes the read group information can be printed from the BAM file with: `samtools view -H WTCHG_461109_50.bam | grep '@RG'`
 
