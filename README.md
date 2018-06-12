@@ -1,4 +1,4 @@
-# Variant calling and genotyping with GATK best practices (2018)
+# Variant calling and genotyping with GATK best practices
 Variant calling identifies SNP and Indel sites that vary from the reference genome. Genotyping determines the genotype for each individual at called variant sites. [Variant calling and genotyping from next-generation sequencing](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/) provides a detailed background. This script takes a single pair of paired end fastq files from whole genome or exome sequencing data which have been previously QC'd and performs all steps necessary to produce a vcf or gvcf file containing germline SNPs and Indels.
 
 The [GATK best practice pipeline for calling germline variants](https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145) is illustrated in the image below. This script `fastqToVar.pl` includes all steps up to and including "Call Variants Per-Sample" which produces a vcf file which must be filtered prior to down stream processing. Filtering has not been included in this pipeline as it is subject to user preference and needs.
