@@ -66,6 +66,13 @@ The read group information required by the script `fastqToVar.pl` can now be ext
         --SEQUENCING_CENTER 	WTCHG                       # CN
         --RUN_DATE 				2018-02-08    				# DT
 
+## Quality Control
+
+The quality of the data should be assessed prior to running the script `fastqToVar.pl` to see if trimming is required.
+
+`mkdir -m 777 qc && fastqc *.fastq --noextract -o ./qc -t 64 && multiqc -f -ip *`
+
+
 ## Options
 
 All options are required.
@@ -103,3 +110,13 @@ All options are required.
 Once the script finishes the read group information can be printed from the BAM file with: `samtools view -H WTCHG_461109_50.bam | grep '@RG'`
 
         @RG	ID:WTCHG_461109_50	SM:mpc372-2.5e	LB:106/18_MPX_10nM	PL:illumina PU:HNGMNBBXX.GTCTGTCA.5 CN:WTCHG	DT:2018-02-08
+
+## Multiple commands for calling GATK
+
+1 On utah
+* gatk --list
+* /NGS/Software/gatk-4.0.3.0/gatk --list
+* java -jar /NGS/Software/gatk-4.0.3.0/gatk-package-4.0.3.0-local.jar --list
+
+2 On grid
+* /usr/java/latest8/bin/java -jar /NGS/Software/gatk-4.0.3.0/gatk-package-4.0.3.0-local.jar --list
