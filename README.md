@@ -3,7 +3,7 @@ Variant calling identifies SNP and Indel sites that vary from the reference geno
 
 The [GATK best practice pipeline for calling germline variants](https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145) is illustrated in the image below. This script `fastqToVar.pl` includes all steps up to and including "Call Variants Per-Sample" which produces a vcf file which must be filtered prior to down stream processing. Filtering has not been included in this pipeline as it is subject to user preference and needs.
 
-<img src="https://us.v-cdn.net/5019796/uploads/editor/mz/tzm69d8e2spl.png" width="800">
+<img src="https://us.v-cdn.net/5019796/uploads/editor/mz/tzm69d8e2spl.png" width="500">
 
 ## Requirements
 
