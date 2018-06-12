@@ -88,13 +88,13 @@ All options are required.
 * -of: 'vcf' or 'gvcf' as described in [single v multi sample analysis](#single-v-multi-sample-analysis)
 * -fq1: full path to the first of the paired fastq files
 * -fq2: full path to the second of the paired fastq files
+* -o: full path to output folder, must end with "/"
 * -id: read group name for GATK from read group information
 * -pu: platform unit for GATK from read group information
 * -sm: sample name for GATK from read group information
 * -pl: platform for GATK from read group information
 * -cn: sequencing centre code for GATK from read group information
 * -dt: run date for GATK from read group information 
-* -o: full path to output folder, must end with "/"
 
 ## Example run command
 
@@ -105,13 +105,13 @@ fastqToVcfOnGrid.pl /
 -of vcf /
 -fq1 WTCHG_461109_50_1.fastq.gz /
 -fq2 WTCHG_461109_50_2.fastq.gz /
+-o /path/to/output/folder/ / # Note the required "/"
 -id WTCHG_461109_50 /
 -pu HNGMNBBXX.GTCTGTCA.5 /
 -sm mpc372-2.5e -lb 106/18_MPX_10nM /
 -pl illumina /
 -cn WTCHG /
--dt 2018-02-08 / 
--o /path/to/output/folder/
+-dt 2018-02-08
 ```
 
 Once the script finishes the read group information can be printed from the BAM file with: `samtools view -H WTCHG_461109_50.bam | grep '@RG'`
