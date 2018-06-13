@@ -22,8 +22,7 @@ The [GATK best practice pipeline for calling germline variants](https://software
 * Indexed vcf with:
 
 ```
-bgzip -c file.vcf > file.vcf.gz && /
-tabix -p vcf file.vcf.gz
+bgzip file.vcf && tabix tabix -p vcf file.vcf.gz
 ```
 
 4 Reference genome
