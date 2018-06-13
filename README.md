@@ -10,8 +10,6 @@ The [GATK best practice pipeline for calling germline variants](https://software
 1 Software
 * [GATK](https://software.broadinstitute.org/gatk/documentation/quickstart.php)
 * [BWA](https://icb.med.cornell.edu/wiki/index.php/Elementolab/BWA_tutorial)
-* [Java](https://java.com/en/download/help/download_options.xml)
-* [Python](https://www.python.org/)
 
 2 User required input
 * A single pair of paired end fastq files
@@ -48,6 +46,11 @@ zcat filename_1.fastq.gz | sed -n 1,1000p > test_1.fastq && /
 zcat filename_2.fastq.gz | sed -n 1,1000p > test_2.fastq && /
 gzip *.fastq
 ```
+## Quality Control
+
+The quality of the data should be assessed prior to running the script `fastqToVar.pl` to see if trimming is required.
+
+`mkdir -m 777 qc && fastqc *.fastq --noextract -o ./qc -t 64 && multiqc -f -ip *`
 
 ## Single v multi sample analysis
 This script `fastqToVar.pl` runs on the paired end fastq files of a single sample to output a vcf file with '-of vcf'. However, if their are multiple samples, the script can be run on each sample to output a gvcf file for each with '-of gvcf'. The multiple gvcf files can then be consolidated and used to joint call variants. This is a continuation of the [GATK best practice pipeline for calling germline variants](https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145) illustrated in the image above. This [tutorial](https://software.broadinstitute.org/gatk/documentation/article?id=11813) describes how to consolidate gvcfs for joint-calling. 
@@ -74,22 +77,18 @@ To view the barcodes present in the fastq file: `grep '^@K00150:286' WTCHG_46110
 
 The read group information required by the script `fastqToVar.pl` can now be extracted for this example data to build the [example run command](#example-run-command):
 
-```
---READ_GROUP_NAME     WTCHG_461109_50 # ID
---SAMPLE_NAME 			  mpc372-2.5e                	# SM
---LIBRARY_NAME 			  106/18_MPX_10nM             # LB
---PLATFORM 				   illumina                    # PL
---PLATFORM_UNIT 		  HNGMNBBXX.GTCTGTCA.5		# PU # flowcellID.[barcode|date|readgroup].lane
---SEQUENCING_CENTER 	WTCHG                       # CN
---RUN_DATE 				   2018-02-08    				# DT
-```
+|  Internal GATK option |  Arguments from data     | fastqToVar.pl option | @RG BAM header |
+|-----------------------|--------------------------|----------------------|----------------|
+|  --READ_GROUP_NAME    |   WTCHG_461109_50        |         -id          |        ID      |
+|  --SAMPLE_NAME        |     mpc372-2.5e          |         -sm          |        SM      |
+|  --LIBRARY_NAME       |   106/18_MPX_10nM        |       not used       |        LB      |
+|  --PLATFORM           |     illumina             |         -pl          |        PL      |
+|  --PLATFORM_UNIT      | **HNGMNBBXX.GTCTGTCA.5** |		     -pu          |        PU      |
+|  --SEQUENCING_CENTER  |         WTCHG            |         -cn          |        CN      |
+|  --RUN_DATE           |       2018-02-08         |         -dt          |        DT      |
 
-## Quality Control
-
-The quality of the data should be assessed prior to running the script `fastqToVar.pl` to see if trimming is required.
-
-`mkdir -m 777 qc && fastqc *.fastq --noextract -o ./qc -t 64 && multiqc -f -ip *`
-
+The string used for --PLATFORM_UNIT is constructed by concatenating:
+**flowcellID.[barcode|date|readgroup].lane**
 
 ## Options
 
@@ -101,12 +100,12 @@ All options are required.
 * -fq1: full path to the first of the paired fastq files
 * -fq2: full path to the second of the paired fastq files
 * -o: full path to output folder, must end with "/"
-* -id: read group name for GATK from read group information
-* -pu: platform unit for GATK from read group information
-* -sm: sample name for GATK from read group information
-* -pl: platform for GATK from read group information
-* -cn: sequencing centre code for GATK from read group information
-* -dt: run date for GATK from read group information 
+* -id: read group name for GATK from read group information or unknown
+* -pu: platform unit for GATK from read group information or unknown
+* -sm: sample name for GATK from read group information or unknown
+* -pl: platform for GATK from read group information or unknown
+* -cn: sequencing centre code for GATK from read group information or unknown
+* -dt: run date for GATK from read group information or unknown
 
 ## Example run command
 
