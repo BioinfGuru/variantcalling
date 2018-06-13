@@ -62,18 +62,10 @@ The Broad Institute provide [a detailed explanation of read groups](https://gatk
 
 ```
 | @instrument | run_number | flowcell_ID | lane | tile | x-pos | y-pos | read | is_filtered | control_number | index(barcode)
-| --- |: --- :| --- | --- | --- | --- | --- | --- | --- | --- | --- 
-| @K00150	| 286	| HNGMNBBXX	| 5	| XXXX | XXXX | XXXX | 1 | N	| 0 | XXXX
+|-------------|------------|-------------|------|------|-------|-------|------|-------------|----------------|---------- 
+|   @K00150   |    286	   |  HNGMNBBXX	 |   5	| XXXX | XXXXX | XXXXX |   1  |      N	    |        0       |      XXXX
+
 # XXXX indicates entries that differentiate reads within a read group so is not needed for read group information
-
-
-Markdown | Less | Pretty
---- | --- | ---
-Still | renders | nicely
-
-
-
-
 ```
 
 * sample/qcstats sheets:
