@@ -25,16 +25,29 @@ The [GATK best practice pipeline for calling germline variants](https://software
 4 Reference genome
 * Already hardcoded into script for mouse and macaque
 * Downloaded fasta from [Ensembl](ftp://ftp.ensembl.org/pub/release-92/fasta/)
-* Indexed with: `bwa index -a fastafile.fa && samtools faidx fastafile.fa && gatk CreateSequenceDictionary -R fastafile.fa`
+* Indexed with: 
+
+```
+bwa index -a fastafile.fa && /
+samtools faidx fastafile.fa && /
+gatk CreateSequenceDictionary -R fastafile.fa
+```
 
 5 Gene intervals
 * Already hardcoded into script for mouse and macaque
 * Downloaded chr, start, end to gene.intervals.bed from [biomart](https://www.ensembl.org/biomart/martview/9e094011f1f0ee298e0b004e64597103)
-* Split file by chromosome with: `grep '^1\s' gene.intervals.bed > gene.intervals.1.bed # repeated for each chromosome`
+* Make a bed file for each chromosome with: 
 
+```
+grep '^1\s' gene.intervals.bed > gene.intervals.1.bed
+```
 To subset your dataset to quickly test change you make to the pipeline:
 
-`zcat filename_1.fastq.gz | sed -n 1,1000p > test_1.fastq && zcat filename_2.fastq.gz | sed -n 1,1000p > test_2.fastq && gzip *.fastq`
+```
+zcat filename_1.fastq.gz | sed -n 1,1000p > test_1.fastq && /
+zcat filename_2.fastq.gz | sed -n 1,1000p > test_2.fastq && /
+gzip *.fastq
+```
 
 ## Single v multi sample analysis
 This script `fastqToVar.pl` runs on the paired end fastq files of a single sample to output a vcf file with '-of vcf'. However, if their are multiple samples, the script can be run on each sample to output a gvcf file for each with '-of gvcf'. The multiple gvcf files can then be consolidated and used to joint call variants. This is a continuation of the [GATK best practice pipeline for calling germline variants](https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145) illustrated in the image above. This [tutorial](https://software.broadinstitute.org/gatk/documentation/article?id=11813) describes how to consolidate gvcfs for joint-calling. 
@@ -48,9 +61,19 @@ The Broad Institute provide [a detailed explanation of read groups](https://gatk
 ########## fix alignments
 
 ```
-@instrument run_number  flowcell_ID lane  tile  x-pos y-pos read  is_filtered control_number  index(barcode)
-@K00150		  286		      HNGMNBBXX	  5		  XXXX  XXXX  XXXX  1     N				    0 				      XXXX
+| @instrument | run_number | flowcell_ID | lane | tile | x-pos | y-pos | read | is_filtered | control_number | index(barcode)
+| --- |: --- :| --- | --- | --- | --- | --- | --- | --- | --- | --- 
+| @K00150	| 286	| HNGMNBBXX	| 5	| XXXX | XXXX | XXXX | 1 | N	| 0 | XXXX
 # XXXX indicates entries that differentiate reads within a read group so is not needed for read group information
+
+
+Markdown | Less | Pretty
+--- | --- | ---
+Still | renders | nicely
+
+
+
+
 ```
 
 * sample/qcstats sheets:
