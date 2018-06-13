@@ -1,6 +1,6 @@
 #!/bin/perl
 # Takes paired fastq files to create a vcf file on the grid#
-# Each pair of fastq files must be in their own empty folder
+# Kenneth Condon June 2018
 
 # example command
 # /NGS/users/Kenneth/toolbox/variantcalling/fastqToVcfOnGrid.pl -m wes -sp mouse -of vcf -fq1 /NGS/users/Kenneth/jobs/michelle_simon/mm10_analysis/testdata1M/testdata1M_1.fastq.gz -fq2 /NGS/users/Kenneth/jobs/michelle_simon/mm10_analysis/testdata1M/testdata1M_2.fastq.gz -id testdata1M -pu HNGMNBBXX.GTCTGTCA.5 -sm mpc372-2.5e -lb 106/18_MPX_10nM -pl illumina -cn WTCHG -dt 2018-02-08 -o /NGS/users/Kenneth/jobs/michelle_simon/mm10_analysis/testdata1M/
