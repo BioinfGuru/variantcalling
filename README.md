@@ -58,21 +58,17 @@ The Broad Institute provide [a detailed explanation of read groups](https://gatk
 * fastq filename:		WTCHG_461109_50_1.fastq.gz
 * fastq headers:		@K00150:286:HNGMNBBXX:5:XXXX:XXXX:XXXX 1:N:0:XXXX       
 
-########## fix alignments
+| @instrument | run_number | flowcell_ID | lane | tile | x-pos | y-pos | read | is_filtered | control_number | index(barcode) |
+|-------------|------------|-------------|------|------|-------|-------|------|-------------|----------------|----------------|
+|   @K00150   |    286	   |  HNGMNBBXX	 |   5	| XXXX | XXXXX | XXXXX |   1  |      N	    |        0       |      XXXX      |
 
-```
-| @instrument | run_number | flowcell_ID | lane | tile | x-pos | y-pos | read | is_filtered | control_number | index(barcode)
-|-------------|------------|-------------|------|------|-------|-------|------|-------------|----------------|---------- 
-|   @K00150   |    286	   |  HNGMNBBXX	 |   5	| XXXX | XXXXX | XXXXX |   1  |      N	    |        0       |      XXXX
-
-# XXXX indicates entries that differentiate reads within a read group so is not needed for read group information
-```
+`XXXX` indicates entries that differentiate reads within a read group so is not needed for read group information
 
 * sample/qcstats sheets:
-```
-Index Tag       Readgroup         Sample_name		    Sample_ID Library		      Type			      Genome			  Project		    Date
-50		GTCTGTCA	WTCHG_461109_50   mpc372-2.5e	      POT5490A2	106/18_MPX_10nM	SureSelectXT	  mm10 	        8-bp P180007 	2018-02-08
-```
+
+| Index |    Tag   |    Readgroup    | Sample_name | Sample_ID |      Library    |      Type      | Genome | Project |    Date    |
+|-------|----------|-----------------|-------------|-----------|-----------------|----------------|--------|---------|------------|
+|   50	| GTCTGTCA | WTCHG_461109_50 | mpc372-2.5e | POT5490A2 | 106/18_MPX_10nM |  SureSelectXT  |  mm10  | P180007 | 2018-02-08 |
 
 To view the barcodes present in the fastq file: `grep '^@K00150:286' WTCHG_461109_50_2.fastq | cut -d : -f 10 | sort | uniq -c | sort -nr > barcodes.txt`
 
