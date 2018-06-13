@@ -129,7 +129,8 @@ fastqToVcfOnGrid.pl /
 -o /path/to/output/folder/ / # Note the required "/"
 -id WTCHG_461109_50 /
 -pu HNGMNBBXX.GTCTGTCA.5 /
--sm mpc372-2.5e -lb 106/18_MPX_10nM /
+-sm mpc372-2.5e /
+-lb 106/18_MPX_10nM /
 -pl illumina /
 -cn WTCHG /
 -dt 2018-02-08
