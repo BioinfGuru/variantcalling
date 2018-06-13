@@ -17,7 +17,7 @@ The [GATK best practice pipeline for calling germline variants](https://software
 
 3 Known variants
 * Already hardcoded into script for mouse and macaque 
-* To update or use other organims, download known variants from <a href="https://bit.ly/2y6v0bW" rel="nofollow">Ensembl</a>
+* To update or use other organisms, download known variants from <a href="https://bit.ly/2y6v0bW" rel="nofollow">Ensembl</a>
 * If you want to use the script on a non-model organism see ["No Excuses"](https://gatkforums.broadinstitute.org/gatk/discussion/11081/base-quality-score-recalibration-bqsr)
 * Indexed vcf with:
 
