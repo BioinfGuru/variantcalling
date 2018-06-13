@@ -44,7 +44,7 @@ gatk CreateSequenceDictionary -R fastafile.fa
 ```
 grep '^1\s' gene.intervals.bed > gene.intervals.1.bed
 ```
-To subset your dataset to quickly test change you make to the pipeline:
+To subset your dataset to quickly test changes you make to the pipeline:
 
 ```
 zcat filename_1.fastq.gz | sed -n 1,1000p > test_1.fastq && /
@@ -60,7 +60,7 @@ mkdir -m 777 qc && fastqc *.fastq --noextract -o ./qc -t 64 && multiqc -f -ip *
 ```
 
 ## Single v multi sample analysis
-This script `fastqToVar.pl` runs on the paired end fastq files of a single sample to output a vcf file with '-of vcf'. However, if their are multiple samples, the script can be run on each sample to output a gvcf file for each with '-of gvcf'. The multiple gvcf files can then be consolidated and used to joint call variants. This is a continuation of the [GATK best practice pipeline for calling germline variants](https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145) illustrated in the image above. This [tutorial](https://software.broadinstitute.org/gatk/documentation/article?id=11813) describes how to consolidate gvcfs for joint-calling. 
+This script `fastqToVar.pl` with the option '-of vcf' runs on the paired end fastq files of a single sample to output a vcf file. However, if their are multiple samples, the script with the option '-of gvcf' can be run on each to output a gvcf file for each sample. The multiple gvcf files can then be consolidated and used to joint call variants. This is a continuation of the [GATK best practice pipeline for calling germline variants](https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145) illustrated in the image above. This [tutorial](https://software.broadinstitute.org/gatk/documentation/article?id=11813) describes how to consolidate gvcfs for joint-calling. 
 
 ## Read group information
 The Broad Institute provide [a detailed explanation of read groups](https://gatkforums.broadinstitute.org/gatk/discussion/6472/read-groups) and why they are needed. In summary, a read group is a set of reads that were generated from a single run of a sequencing instrument, so providing read group information assists the pipeline in the identification and removal of batch effects. Read group information can be found in the fastq filename and header and also in the sample sheet or qcstats sheet if available as shown in the following example:
