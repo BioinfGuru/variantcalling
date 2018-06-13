@@ -19,11 +19,17 @@ The [GATK best practice pipeline for calling germline variants](https://software
 * Already hardcoded into script for mouse and macaque 
 * To update or use other organims, download known variants from <a href="https://bit.ly/2y6v0bW" rel="nofollow">Ensembl</a>
 * If you want to use the script on a non-model organism see ["No Excuses"](https://gatkforums.broadinstitute.org/gatk/discussion/11081/base-quality-score-recalibration-bqsr)
+* Index vcf with:
+
+```
+bgzip -c file.vcf > file.vcf.gz && /
+tabix -p vcf file.vcf.gz
+```
 
 4 Reference genome
 * Already hardcoded into script for mouse and macaque
 * Downloaded fasta from <a href="https://bit.ly/2y6NlWe" rel="nofollow">Ensembl</a>
-* Indexed with: 
+* Indexed fasta with: 
 
 ```
 bwa index -a fastafile.fa && /
