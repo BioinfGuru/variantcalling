@@ -50,7 +50,9 @@ gzip *.fastq
 
 The quality of the data should be assessed prior to running the script `fastqToVar.pl` to see if trimming is required.
 
-`mkdir -m 777 qc && fastqc *.fastq --noextract -o ./qc -t 64 && multiqc -f -ip *`
+```
+mkdir -m 777 qc && fastqc *.fastq --noextract -o ./qc -t 64 && multiqc -f -ip *
+```
 
 ## Single v multi sample analysis
 This script `fastqToVar.pl` runs on the paired end fastq files of a single sample to output a vcf file with '-of vcf'. However, if their are multiple samples, the script can be run on each sample to output a gvcf file for each with '-of gvcf'. The multiple gvcf files can then be consolidated and used to joint call variants. This is a continuation of the [GATK best practice pipeline for calling germline variants](https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145) illustrated in the image above. This [tutorial](https://software.broadinstitute.org/gatk/documentation/article?id=11813) describes how to consolidate gvcfs for joint-calling. 
@@ -73,8 +75,11 @@ The Broad Institute provide [a detailed explanation of read groups](https://gatk
 |-------|----------|-----------------|-------------|-----------|-----------------|----------------|--------|---------|------------|
 |   50	| GTCTGTCA | WTCHG_461109_50 | mpc372-2.5e | POT5490A2 | 106/18_MPX_10nM |  SureSelectXT  |  mm10  | P180007 | 2018-02-08 |
 
-To view the barcodes present in the fastq file: `grep '^@K00150:286' WTCHG_461109_50_2.fastq | cut -d : -f 10 | sort | uniq -c | sort -nr > barcodes.txt`
+To view the barcodes present in the fastq file: 
 
+```
+grep '^@K00150:286' WTCHG_461109_50_2.fastq | cut -d : -f 10 | sort | uniq -c | sort -nr > barcodes.txt
+```
 The read group information required by the script `fastqToVar.pl` can now be extracted for this example data to build the [example run command](#example-run-command):
 
 |  Internal GATK option |  Arguments from data     | fastqToVar.pl option | @RG BAM header |
@@ -125,10 +130,12 @@ fastqToVcfOnGrid.pl /
 -dt 2018-02-08
 ```
 
-Once the script finishes the read group information can be printed from the BAM file with: `samtools view -H WTCHG_461109_50.bam | grep '@RG'`
+Once the script finishes the read group information can be printed from the BAM file with: 
 
 ```
-@RG	ID:WTCHG_461109_50	SM:mpc372-2.5e	LB:106/18_MPX_10nM	PL:illumina PU:HNGMNBBXX.GTCTGTCA.5 CN:WTCHG	DT:2018-02-08
+samtools view -H WTCHG_461109_50.bam | grep '@RG'
+
+@RG ID:WTCHG_461109_50 SM:mpc372-2.5e LB:106/18_MPX_10nM PL:illumina PU:HNGMNBBXX.GTCTGTCA.5 CN:WTCHG DT:2018-02-08
 ```
 
 ## Multiple commands for calling GATK
