@@ -22,7 +22,7 @@ The [GATK best practice pipeline for calling germline variants](https://software
 
 4 Reference genome
 * Already hardcoded into script for mouse and macaque
-* Downloaded fasta from [Ensembl](ftp://ftp.ensembl.org/pub/release-92/fasta/)
+* Downloaded fasta from <a href="https://bit.ly/2y6NlWe" rel="nofollow">Ensembl</a>
 * Indexed with: 
 
 ```
